@@ -12,6 +12,8 @@
 # ARG_OPTIONAL_BOOLEAN([list-outputs],[],[list available outputs],[off])
 # ARG_OPTIONAL_BOOLEAN([quiet],[q],[quiet execution, no output to stdout],[off])
 # ARG_OPTIONAL_BOOLEAN([fancy],[f],[fancy formatted output],[on])
+# ARG_OPTIONAL_SINGLE([remote_url],[u],[remote url to use if necessary],[https://raw.githubusercontent.com/LuxAter/Thema/master/])
+# ARG_OPTIONAL_BOOLEAN([remote],[r],[use remote configuration/files],[off])
 # ARGBASH_SET_INDENT([  ])
 # ARGBASH_GO()
 # needed because of Argbash --> m4_ignore([
@@ -39,12 +41,14 @@ _arg_list_variants="off"
 _arg_list_outputs="off"
 _arg_quiet="off"
 _arg_fancy="on"
+_arg_remote_url="https://raw.githubusercontent.com/LuxAter/Thema/master/"
+_arg_remote="off"
 
 
 print_help()
 {
   printf '%s\n' "System wide theme configuration tool"
-  printf 'Usage: %s [-h|--help] [-v|--version] [-o|--output <arg>] [-t|--theme <arg>] [--variant <arg>] [--(no-)list-themes] [--(no-)list-variants] [--(no-)list-outputs] [-q|--(no-)quiet] [-f|--(no-)fancy]\n' "$0"
+  printf 'Usage: %s [-h|--help] [-v|--version] [-o|--output <arg>] [-t|--theme <arg>] [--variant <arg>] [--(no-)list-themes] [--(no-)list-variants] [--(no-)list-outputs] [-q|--(no-)quiet] [-f|--(no-)fancy] [-u|--remote_url <arg>] [-r|--(no-)remote]\n' "$0"
   printf '\t%s\n' "-h, --help: Prints help"
   printf '\t%s\n' "-v, --version: Prints version"
   printf '\t%s\n' "-o, --output: outputs to install new theme (empty by default)"
@@ -55,6 +59,8 @@ print_help()
   printf '\t%s\n' "--list-outputs, --no-list-outputs: list available outputs (off by default)"
   printf '\t%s\n' "-q, --quiet, --no-quiet: quiet execution, no output to stdout (off by default)"
   printf '\t%s\n' "-f, --fancy, --no-fancy: fancy formatted output (on by default)"
+  printf '\t%s\n' "-u, --remote_url: remote url to use if necessary (default: 'https://raw.githubusercontent.com/LuxAter/Thema/master/')"
+  printf '\t%s\n' "-r, --remote, --no-remote: use remote configuration/files (off by default)"
 }
 
 
@@ -115,6 +121,18 @@ parse_commandline()
       -f|--no-fancy|--fancy)
         _arg_fancy="on"
         test "${1:0:5}" = "--no-" && _arg_fancy="off"
+        ;;
+      -u|--remote_url)
+        test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+        _arg_remote_url="$2"
+        shift
+        ;;
+      --remote_url=*)
+        _arg_remote_url="${_key##--remote_url=}"
+        ;;
+      -r|--no-remote|--remote)
+        _arg_remote="on"
+        test "${1:0:5}" = "--no-" && _arg_remote="off"
         ;;
       *)
         _PRINT_HELP=yes die "FATAL ERROR: Got an unexpected argument '$1'" 1
@@ -189,9 +207,6 @@ msg_header() {
   [ "$_arg_fancy" == "on" ] && cmsg "$1" "$BOLD" "${@:2}"
 }
 
-# Script setup detection
-remote_url="https://raw.githubusercontent.com/LuxAter/Thema/master/"
-
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 [ -f "$script_dir/thema" ] && using_local=true || using_local=false
 
@@ -201,12 +216,13 @@ installed_dir=$(command -v "thema")
 [ $is_installed -eq 0 ] && [ "$script_dir" == "$installed_dir" ] && using_installed=true || using_installed=false
 
 [ $using_local == true ] && current_version=$($script_dir/thema --version | head -n 1 | awk '{print $2}') || current_version='latest'
+[ "$_arg_remote" == "on" ] && using_local=false
 
 # Configuration file/directory detection
 if [ $using_local == false ]; then
   msg_header 0 "Fetching configuration file..."
-  wget -q "$remote_url/thema.yml" -O "$script_dir/.thema.tmp.yml" &>/dev/null
-  config_path="$script_dir/.thema.tmp.yml"
+  wget -q "$_arg_remote_url/thema.yml" -O "$script_dir/.thema.yml.tmp" &>/dev/null
+  config_path="$script_dir/.thema.yml.tmp"
   config_dir="remote"
 else
   echo "Checking for update..."
@@ -384,7 +400,6 @@ if [ "${#_arg_output[*]}" -gt 0 ]; then
   output_str="${outputs[@]}"
   outputs=()
   for output in ${_arg_output[*]}; do
-    echo "$output"
     [ $(array_in "$output" "$output_str") == true ] && outputs+=("$output")
   done
 fi
@@ -493,8 +508,8 @@ source_file() {
     var="/$variant"
   fi
   if [ "$config_dir" == "remote" ]; then
-    wget -q "$remote_url/$theme$var/$file" -O ".$file" &>/dev/null 
-    [ -z ".$file" ] && echo "$(cat ".$file")" && rm ".$file"
+    wget -q "$_arg_remote_url/$theme$var/$file" -O "$script_dir/.$file.tmp" &>/dev/null
+    [ -f "$script_dir/.$file.tmp" ] && echo "$(cat "$script_dir/.$file.tmp")" && rm "$script_dir/.$file.tmp"
   else
     [ -f "$config_dir/$theme$var/$file" ] && echo "$(cat "$config_dir/$theme$var/$file")"
   fi
@@ -595,9 +610,9 @@ fi
 
 
 # Cleanup
-if [ $using_local == false ] && [ -f "$script_dir/.thema.tmp.yml" ]; then
-  echo "removing temporary config"
-  rm "$script_dir/.thema.tmp.yml"
+if [ $using_local == false ] && [ -f "$script_dir/.thema.yml.tmp" ]; then
+  msg_header 0 "Removing temporary files"
+  rm "$script_dir/.thema.yml.tmp"
 fi
 
 
