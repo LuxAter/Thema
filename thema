@@ -598,7 +598,8 @@ commands=($(array_unique ${commands[*]}))
 if [ ${#commands[*]} -gt 0 ]; then
   msg_header 0 "Executing Commands:"
   for cmd in ${commands[*]}; do
-    output=$($cmd)
+    cmd=$(sed 's/<SPACE>/ /g' <<< "$cmd")
+    output=$($cmd 2>&1)
     if [ $? -ne 0 ]; then
       msg_error 1 "$cmd"
       echo "$output"
