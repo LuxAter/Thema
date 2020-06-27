@@ -16,7 +16,7 @@ wallpaper:
       - $HOME/Pictures/wallpaper/arch.svg
     replace: true
   command:
-    - feh --bg-fill --convert-time 1 $HOME/Pictures/wallpaper/arch.svg
+    - feh --bg-fill --conversion-timeout 1 $HOME/Pictures/wallpaper/arch.svg
 bspwm:
   bspwmrc:
     destination:
