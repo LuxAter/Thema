@@ -205,7 +205,7 @@ installed_dir=$(command -v "thema")
 # Configuration file/directory detection
 if [ $using_local == false ]; then
   msg_header 0 "Fetching configuration file..."
-  wget -q "$remote_url/thema.yml" -O "$script_dir/.thema.tmp.yml"
+  wget -q "$remote_url/thema.yml" -O "$script_dir/.thema.tmp.yml" &>/dev/null
   config_path="$script_dir/.thema.tmp.yml"
   config_dir="remote"
 else
@@ -493,7 +493,7 @@ source_file() {
     var="/$variant"
   fi
   if [ "$config_dir" == "remote" ]; then
-    wget -q "$remote_url/$theme$var/$file" -o ".$file" &>/dev/null 
+    wget -q "$remote_url/$theme$var/$file" -O ".$file" &>/dev/null 
     [ -z ".$file" ] && echo "$(cat ".$file")" && rm ".$file"
   else
     [ -f "$config_dir/$theme$var/$file" ] && echo "$(cat "$config_dir/$theme$var/$file")"
