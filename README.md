@@ -7,7 +7,6 @@
     <a href="https://github.com/LuxAter/Thema/issues"><img src="https://img.shields.io/github/issues/LuxAter/Thema.svg?style=flat-square"></a>
     <a href="https://github.com/LuxAter/Thema/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/LuxAter/Thema.svg?style=flat-square"></a>
     <a href="https://github.com/LuxAter/Thema/releases"><img src="https://img.shields.io/github/tag/LuxAter/Thema.svg?include_prereleases&sort=semver&style=flat-square"></a>
-    <a href="https://github.com/LuxAter/Thema/actions?query=workflows%3ADevelopment"><img src="https://img.shields.io/github/workflow/status/LuxAter/Thema/Development.svg?include_prereleases&sort=semver&style=flat-square"></a>
     <br/>
     System wide theme configuration tool
     <br/>
@@ -87,6 +86,6 @@ are optional.
 
 ## License
 
-Distributed under the GNU GPLv3 license. See
+Distributed under the MIT license. See
 [`LICENSE.md`](https://github.com/LuxAter/Thema/blob/master/LICENSE.md)
 for more information.
