@@ -1,0 +1,51 @@
+themes:
+  dracula: default
+  gruvbox: dark light
+  nord: default
+  solarized: dark light
+alacritty:
+  alacritty.yml:
+    destination:
+      - $XDG_CONFIG_HOME/alacritty/alacritty.yml
+      - $XDG_CONFIG_HOME/alacritty.yml
+      - $HOME/.config/alacritty/alacritty.yml
+      - $HOME/.alacritty.yml
+wallpaper:
+  arch.svg:
+    destination:
+      - $HOME/Pictures/wallpaper/arch.svg
+    replace: true
+  command:
+    - feh --bg-fill --convert-time 1 $HOME/Pictures/wallpaper/arch.svg
+bspwm:
+  bspwmrc:
+    destination:
+    - $XDG_CONFIG_HOME/bspwm/bspwmrc
+    - $HOME/.config/bspwm/bspwmrc
+rofi:
+  config.rasi:
+    destination:
+    - $XDG_CONFIG_HOME/rofi/config.rasi
+    - $XDG_CONFIG_HOME/rofi/config
+    - $HOME/.config/rofi/config.rasi
+    - $HOME/.config/rofi/config
+kitty:
+  kitty.conf:
+    destination:
+      - $XDG_CONFIG_HOME/kitty/kitty.conf
+      - $XDG_CONFIG_HOME/kitty.conf
+      - $HOME/.config/kitty/kitty.conf
+      - $HOME/.kitty.conf
+waybar:
+  waybar.css:
+    destination:
+      - $HOME/.config/waybar/style.css
+      - $HOME/waybar/style.css
+    start_of_file: true
+    comment: /* */
+  command:
+    - sway reload
+Xresources:
+  Xresources:
+    destination:
+    - $HOME/.Xresources
