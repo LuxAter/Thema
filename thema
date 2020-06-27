@@ -204,8 +204,8 @@ installed_dir=$(command -v "thema")
 
 # Configuration file/directory detection
 if [ $using_local == false ]; then
-  echo "Fetching temporary configuration file..."
-  wget "$remote_url/thema.yml" -o "$script_dir/.thema.tmp.yml"
+  msg_header 0 "Fetching configuration file..."
+  wget "$remote_url/thema.yml" -O "$script_dir/.thema.tmp.yml"
   config_path="$script_dir/.thema.tmp.yml"
   config_dir="remote"
 else
