@@ -31,6 +31,7 @@ rofi:
       - $XDG_CONFIG_HOME/rofi/config
       - $HOME/.config/rofi/config.rasi
       - $HOME/.config/rofi/config
+    comment: /* */
 kitty:
   kitty.conf:
     destination:
@@ -51,3 +52,4 @@ Xresources:
   Xresources:
     destination:
       - $HOME/.Xresources
+    comment: !

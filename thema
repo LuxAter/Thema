@@ -531,6 +531,7 @@ install_target() {
   else
     destinations=($(get_array "_cfg_${output}_${target}_destination"))
     dest=$(find_dest ${destinations[*]})
+    [ -z "$dest" ] && return 1
     [ -z "$variant" ] && theme_str="$_arg_theme" || theme_str="$_arg_theme($_arg_variant)"
     if has_val "_cfg_${output}_${target}_comment"; then
       comments=$(get_val "_cfg_${output}_${target}_comment")
