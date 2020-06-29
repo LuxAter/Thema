@@ -225,9 +225,6 @@ if [ $using_local == false ]; then
   config_path="$script_dir/.thema.yml.tmp"
   config_dir="remote"
 else
-  echo "Checking for update..."
-  # TODO!
-
   if [ -f "$script_dir/thema.yml" ]; then
     config_dir="$script_dir"
     config_path="$script_dir/thema.yml"
@@ -383,9 +380,9 @@ output_uses_thema() {
       comment_end=
     fi
     ecomment_start=$(sed 's/\//\\\//g' <<< "$comment_start")
-    ecomment_start=$(sed 's/\*/\\\*/g' <<< "$comment_start")
-    ecomment_end=$(sed 's/\//\\\//g' <<< "$comment_end")
+    ecomment_start=$(sed 's/\*/\\\*/g' <<< "$ecomment_start")
     ecomment_end=$(sed 's/\*/\\\*/g' <<< "$comment_end")
+    ecomment_end=$(sed 's/\//\\\//g' <<< "$ecomment_end")
     if grep -xq "$ecomment_start Thema Begin -- .* $ecomment_end" "$dest"; then
       return 0
     else
@@ -420,10 +417,10 @@ for output in ${outputs[*]}; do
       comment_start='#'
       comment_end=
     fi
-    ecomment_start=$(sed 's/\//\\\//g' <<< "$comment_start")
     ecomment_start=$(sed 's/\*/\\\*/g' <<< "$comment_start")
-    ecomment_end=$(sed 's/\//\\\//g' <<< "$comment_end")
+    ecomment_start=$(sed 's/\//\\\//g' <<< "$ecomment_start")
     ecomment_end=$(sed 's/\*/\\\*/g' <<< "$comment_end")
+    ecomment_end=$(sed 's/\//\\\//g' <<< "$ecomment_end")
     if grep -xq "$ecomment_start Thema Begin -- .* $ecomment_end" "$dest"; then
       theme_variant=$(grep -x "$ecomment_start Thema Begin -- .* $ecomment_end" "$dest" | sed "s/$ecomment_start Thema Begin -- \(.*\) $ecomment_end/\1/")
       variant=${theme_variant#*(}
@@ -541,10 +538,10 @@ install_target() {
       comment_start='#'
       comment_end=
     fi
-    ecomment_start=$(sed 's/\//\\\//g' <<< "$comment_start")
     ecomment_start=$(sed 's/\*/\\\*/g' <<< "$comment_start")
-    ecomment_end=$(sed 's/\//\\\//g' <<< "$comment_end")
+    ecomment_start=$(sed 's/\//\\\//g' <<< "$ecomment_start")
     ecomment_end=$(sed 's/\*/\\\*/g' <<< "$comment_end")
+    ecomment_end=$(sed 's/\//\\\//g' <<< "$ecomment_end")
     grep -Fxq "$comment_start Thema Begin -- $theme_str $comment_end" "$dest" && return 0
     if grep -xq "$ecomment_start Thema Begin -- .* $ecomment_end" "$dest"; then
       source=$(sed ':a;N;$!ba;s/\n/\\n/g' <<< "$source")

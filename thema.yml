@@ -52,4 +52,4 @@ Xresources:
   Xresources:
     destination:
       - $HOME/.Xresources
-    comment: !
+    comment: ! 
