@@ -53,3 +53,11 @@ Xresources:
     destination:
       - $HOME/.Xresources
     comment: ! 
+zathura:
+  zathura.conf:
+    destination:
+      - $XDG_CONFIG_HOME/zathura/zathurarc
+      - $XDG_CONFIG_HOME/zathurarc
+      - $HOME/.config/zathura/zathurarc
+      - $HOME/.zathurarc
+
