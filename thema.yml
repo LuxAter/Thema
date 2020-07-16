@@ -60,4 +60,15 @@ zathura:
       - $XDG_CONFIG_HOME/zathurarc
       - $HOME/.config/zathura/zathurarc
       - $HOME/.zathurarc
+homepage:
+  style.css:
+    destination:
+      - $XDG_CONFIG_HOME/home/web/style.css
+      - $HOME/.config/home/web/style.css
+      - $HOME/.home/web/style.css
+      - $XDG_CONFIG_HOME/home/style.css
+      - $HOME/.config/home/style.css
+      - $HOME/.home/style.css
+    start_of_file: true
+    comment: /* */
 
