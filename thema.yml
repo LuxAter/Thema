@@ -1,8 +1,9 @@
 themes:
   dracula: default
-  gruvbox: dark light
+  gruvbox: dark light material
   nord: default
   solarized: dark light
+  ayu: dark mirage light
 alacritty:
   alacritty.yml:
     destination:
@@ -46,8 +47,12 @@ waybar:
       - $HOME/waybar/style.css
     start_of_file: true
     comment: /* */
-  command:
-    - sway reload
+polybar:
+  polybar.ini:
+    destination:
+      - $HOME/.config/polybar/config
+    start_of_file: true
+    comment: ;
 Xresources:
   Xresources:
     destination:
