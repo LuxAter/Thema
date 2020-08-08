@@ -26,7 +26,7 @@ bspwm:
   command:
     - bspc wm -r
 rofi:
-  config.rasi:
+  rofi.rasi:
     destination:
       - $XDG_CONFIG_HOME/rofi/config.rasi
       - $XDG_CONFIG_HOME/rofi/config
