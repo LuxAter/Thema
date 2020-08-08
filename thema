@@ -2,7 +2,7 @@
 
 # Created by argbash-init v2.8.1
 # ARG_HELP([System wide theme configuration tool])
-# ARG_VERSION_AUTO([2.0.0])
+# ARG_VERSION_AUTO([2.0.2])
 # ARG_OPTION_STACKING([getopts])
 # ARG_OPTIONAL_REPEATED([output],[o],[outputs to install new theme],[])
 # ARG_OPTIONAL_SINGLE([theme],[t],[theme to install])
@@ -529,6 +529,7 @@ install_target() {
     destinations=($(get_array "_cfg_${output}_${target}_destination"))
     dest=$(find_dest ${destinations[*]})
     [ -z "$dest" ] && return 1
+    [ -L "$dest" ] && dest=$(readlink "$dest")
     [ -z "$variant" ] && theme_str="$_arg_theme" || theme_str="$_arg_theme($_arg_variant)"
     if has_val "_cfg_${output}_${target}_comment"; then
       comments=$(get_val "_cfg_${output}_${target}_comment")

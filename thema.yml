@@ -1,7 +1,7 @@
 themes:
   dracula: default
   gruvbox: dark light material
-  nord: default
+  nord: dark light
   solarized: dark light
   ayu: dark mirage light
 alacritty:
@@ -65,6 +65,14 @@ zathura:
       - $XDG_CONFIG_HOME/zathurarc
       - $HOME/.config/zathura/zathurarc
       - $HOME/.zathurarc
+fzf:
+  fzf.sh:
+    destination:
+      - $XDG_CONFIG_HOME/fzf/fzfrc
+      - $XDG_CONFIG_HOME/fzfrc
+      - $HOME/.config/fzf/fzfrc
+      - $HOME/.fzfrc
+    start_of_file: true
 homepage:
   style.css:
     destination:
