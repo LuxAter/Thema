@@ -1,0 +1,27 @@
+colors:
+  # Default colors
+  primary:
+    background: '{{ hex bg0 }}'
+    foreground: '{{ hex fg1 }}'
+
+  # Normal colors
+  normal:
+    black:   '{{ hex bg1 }}'
+    red:     '{{ hex red }}'
+    green:   '{{ hex green }}'
+    yellow:  '{{ hex yellow }}'
+    blue:    '{{ hex blue }}'
+    magenta: '{{ hex magenta }}'
+    cyan:    '{{ hex cyan }}'
+    white:   '{{ hex fg4 }}'
+
+  # Bright colors
+  bright:
+    black:   '{{ hex bg4 }}'
+    red:     '{{ hex brightRed }}'
+    green:   '{{ hex brightGreen }}'
+    yellow:  '{{ hex brightYellow }}'
+    blue:    '{{ hex brightBlue }}'
+    magenta: '{{ hex brightMagenta }}'
+    cyan:    '{{ hex brightCyan }}'
+    white:   '{{ hex fg0 }}'

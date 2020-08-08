@@ -1,0 +1,26 @@
+*background: {{ hex bg0 }}
+*foreground: {{ hex fg1 }}
+! Black + DarkGrey
+*color0:  {{ hex bg1 }}
+*color8:  {{ hex bg4 }}
+! DarkRed + Red
+*color1:  {{ hex red }}
+*color9:  {{ hex brightRed }}
+! DarkGreen + Green
+*color2:  {{ hex green }}
+*color10: {{ hex brightGreen }}
+! DarkYellow + Yellow
+*color3:  {{ hex yellow }}
+*color11: {{ hex brightYellow }}
+! DarkBlue + Blue
+*color4:  {{ hex blue }}
+*color12: {{ hex brightBlue }}
+! DarkMagenta + Magenta
+*color5:  {{ hex magenta }}
+*color13: {{ hex brightMagenta }}
+! DarkCyan + Cyan
+*color6:  {{ hex cyan }}
+*color14: {{ hex brightCyan }}
+! LightGrey + White
+*color7:  {{ hex fg4 }}
+*color15: {{ hex fg0 }}
