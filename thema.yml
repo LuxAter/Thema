@@ -4,6 +4,7 @@ themes:
   nord: dark light
   solarized: dark light
   ayu: dark mirage light
+  one: dark light
 alacritty:
   alacritty.yml:
     destination:
