@@ -85,4 +85,8 @@ homepage:
       - $HOME/.home/style.css
     start_of_file: true
     comment: /* */
-
+dunst:
+  dunst.ini:
+    destination:
+      - $XDG_CONFIG_HOME/dunst/dunstrc
+      - $HOME/.config/dunst/dunstrc
