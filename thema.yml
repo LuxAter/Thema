@@ -73,6 +73,11 @@ fzf:
       - $HOME/.config/fzf/fzfrc
       - $HOME/.fzfrc
     start_of_file: true
+tmux:
+  tmux.conf:
+    destination:
+      - $HOME/.tmux.conf
+    start_of_file: true
 homepage:
   style.css:
     destination:
