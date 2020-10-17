@@ -95,3 +95,11 @@ dunst:
     destination:
       - $XDG_CONFIG_HOME/dunst/dunstrc
       - $HOME/.config/dunst/dunstrc
+spicetify:
+  spicetify.ini:
+    destination:
+      - $XDG_CONFIG_HOME/.config/spicetify/Themes/Thema/color.ini
+      - $HOME/.config/spicetify/Themes/Thema/color.ini
+    comment: ;
+  command:
+    - spicetify update --no-restart
